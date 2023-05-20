@@ -141,7 +141,7 @@ div {
   h5,
   h6,
   v-btn {
-    font-family: "Cafe24Ssurround";
+    font-family: "GyeonggiTitleM";
   }
   div {
     font-family: "GyeonggiTitleM";

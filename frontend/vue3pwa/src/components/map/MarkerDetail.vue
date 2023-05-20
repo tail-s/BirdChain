@@ -36,33 +36,32 @@
         height="300px"
         cover
         class="my-4" />
-      <v-card-text class="d-flex align-start flex-column ml-3">
+      <v-card-text>
         <div class="list-item">
-          <p><strong>위치</strong></p>
+          <label><strong>위치</strong></label>
           <p>{{ detailData.location }}</p>
         </div>
         <div class="list-item">
-          <p><strong>유형</strong></p>
+          <label><strong>유형</strong></label>
           <p>{{ detailData.type }}</p>
         </div>
-        <p v-if="modifyFlagMarker" class="required-item" style="margin-left: 75px;">선택입력사항</p>
         <div class="list-item">
-          <p><strong>내용</strong></p>
+          <label><strong>내용</strong></label>
           <p v-if="!modifyFlagMarker">
             {{ detailData.content }}
           </p>
-          <form
-            @submit.prevent
-            v-if="modifyFlagMarker"
-            class="modify-form-marker">
-            <textarea
-              id="content"
-              v-model="modiContentMarker"
-              class="modify-input-marker"></textarea>
-          </form>
+          <div v-if="modifyFlagMarker" class="modify-form-marker">
+            <p class="required-item">선택입력사항</p>
+            <form @submit.prevent>
+              <textarea
+                id="content"
+                v-model="modiContentMarker"
+                class="modify-content-marker"></textarea>
+            </form>
+          </div>
         </div>
-        <div v-if="modifyFlagMarker" class="modify-input">
-          <p class="required-item">선택입력사항</p>
+        <div v-if="modifyFlagMarker" class="modify-img-container">
+          <p class="required-item-img">선택입력사항</p>
           <v-form>
             <v-file-input
               prepend-icon="mdi-camera"
@@ -78,21 +77,23 @@
             올바른 이미지 파일을 선택해주세요.
           </p>
         </div>
-        <div v-if="deleteFlagMarker || modifyFlagMarker" class="modify-input">
-          <p class="required-item">*필수입력사항</p>
-          <form @submit.prevent class="password-form">
-            <label>
-              <strong>비밀<br />번호</strong>
-            </label>
-            <input
-              type="password"
-              v-model="password"
-              class="password-input-marker"
-              autoComplete="off" />
-          </form>
-          <span v-if="isAcceptable" class="warn-info">
-            비밀번호를 잘못 입력했습니다. 다시 입력해주세요.
-          </span>
+        <div v-if="deleteFlagMarker || modifyFlagMarker" class="list-item">
+          <label>
+            <strong>비밀<br />번호</strong>
+          </label>
+          <div class="password-form-marker">
+            <p class="required-item">*필수입력사항</p>
+            <form @submit.prevent>
+              <input
+                type="password"
+                v-model="password"
+                class="password-input-marker"
+                autoComplete="off" />
+            </form>
+            <p v-if="isAcceptable" class="warn-info">
+              비밀번호를 잘못 입력했습니다. 다시 입력해주세요.
+            </p>
+          </div>
         </div>
       </v-card-text>
     </div>
@@ -220,7 +221,7 @@ const showModifyInputMarker = () => {
 
   if (modifyFlagMarker.value) {
     setTimeout(function () {
-      document.querySelector(".modify-input-marker").focus();
+      document.querySelector(".modify-content-marker").focus();
     }, 10);
   }
 };
@@ -285,7 +286,7 @@ const doModifyMarker = () => {
     .catch((error) => {
       Swal.fire({
         position: "center",
-        title: `"${error.response.data.message}"`,
+        title: `${error.response.data.message}`,
         icon: "error",
       }).then(function () {
         isAcceptable.value = true;
@@ -361,7 +362,7 @@ const doDeleteMarker = () => {
         .catch((error) => {
           Swal.fire({
             position: "center",
-            title: `"${error.response.data.message.value}"`,
+            title: `${error.response.data.message}`,
             icon: "error",
           }).then(function () {
             isAcceptable.value = true;
@@ -398,26 +399,24 @@ const doDeleteMarker = () => {
   cursor: pointer;
 }
 
-.password-form {
-  display: flex;
-  margin-left: 7px;
+.password-form-marker {
+  width: 295px;
+  margin-left: 15px;
 }
 
 .password-input-marker {
-  font-size: medium;
-  padding-left: 18px;
-  margin-left: 16px;
   background: rgb(230, 230, 230);
   border-radius: 5px;
   width: 295px;
   height: 40px;
+  padding: 5px;
 }
 
 .warn-info {
-  display: block;
-  width: 335px;
-  color: red;
   font-size: 10px;
+  color: red;
+  text-align: start;
+  margin-left: 7px;
 }
 
 .v-card-title {
@@ -432,17 +431,21 @@ const doDeleteMarker = () => {
   padding-top: 0;
 }
 
+.password-container {
+  display: flex;
+  margin: 10px auto 0 auto;
+  width: 340px;
+}
+
 .list-item {
   display: flex;
   margin: 10px auto 0 auto;
+  width: 340px;
 }
 
-.modify-input {
-  margin: 0 auto;
-}
-
-.list-item p:nth-child(1) {
-  margin-top: 5px;
+.list-item > label {
+  height: 20px;
+  margin: auto 0;
 }
 
 .list-item p:nth-child(2) {
@@ -454,30 +457,29 @@ const doDeleteMarker = () => {
   text-align: start;
 }
 
-.v-card-text div:nth-child(4) {
-  margin-top: 0;
+.modify-img-container {
+  margin: 10px auto 0 auto;
+  width: 340px;
 }
 
 .modify-form-marker {
-  width: 305px;
-  height: 50px;
+  width: 295px;
+  margin-left: 15px;
 }
 
-.modify-input-marker {
+.modify-content-marker {
   background: rgb(230, 230, 230);
   width: 295px;
+  height: 60px;
   padding: 5px;
-  margin-left: 15px;
   border-radius: 5px;
-  text-align: start;
-  margin-bottom: 0;
 }
 
 .img-valid {
-  text-align: left;
-  font-size: 5px;
-  margin-left: 50px;
+  font-size: 10px;
   color: red;
+  margin-left: 50px;
+  text-align: start;
 }
 .v-form {
   display: flex;
@@ -494,11 +496,17 @@ const doDeleteMarker = () => {
 }
 
 .required-item {
-  font-size: 5px;
-  color: black;
-  font-weight: bold;
-  text-align: left;
-  margin-top: 10px;
-  margin-left: 50px;
+  font-size: 10px;
+  margin-right: 220px;
+}
+.required-item-img {
+  font-size: 10px;
+  margin-right: 180px;
+}
+
+@media (max-width: 800px) {
+  .my-card-marker {
+    width: 380px;
+  }
 }
 </style>

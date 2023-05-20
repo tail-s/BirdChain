@@ -24,7 +24,7 @@
         <v-dialog v-model="modalVisible">
           <v-card>
             <v-card-title class="text-center">
-              <span class="headline">게시물 등록</span>
+              <span class="headline">게시글 등록</span>
             </v-card-title>
             <v-card-text>
               <p class="required-input">*표시는 필수 입력 사항입니다.</p>

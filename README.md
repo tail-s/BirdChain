@@ -1,6 +1,6 @@
-# ***PERSONA***
+# ***BIRDCHAIN***
 
-## **: 야생 조류를 위한 NFT 기부 프로젝트**
+## **: 멸종 위기 조류를 위한 NFT 기부 프로젝트**
 
 ![Untitled](images/image1.png)
 

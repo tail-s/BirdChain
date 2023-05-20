@@ -40,6 +40,7 @@
             <h4>3. sepolia ether 얻기</h4>
             <a href="https://sepolia-faucet.pk910.de/">바로가기 -> https://sepolia-faucet.pk910.de/</a><br/> <br/>
             <h4>4. 기부하기를 클릭하여 기부하기!</h4>
+            <h4 style="color: brown;">*기부는 pc에서만 가능합니다.</h4>
           </v-card-text>
           <v-card-actions>
             <v-btn color="teal-darken-2" block @click="dialog = false"
@@ -88,7 +89,7 @@ export default defineComponent({
 .navBox {
   display: flex;
   align-items: center;
-  border-bottom: solid;
+  border-bottom: solid #646464;;
   background-color: white;
 }
 

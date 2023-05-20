@@ -1,0 +1,44 @@
+server:
+  servlet:
+    context-path: /api
+    port: 8080
+
+logging:
+  config: classpath:log4j2.xml
+#  config: classpath:logback-spring.xml
+
+spring:
+  profiles:
+    include: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysql.port}/birdchain?allowPublicKeyRetrieval=true&useSSL=false&useUniCode=yes&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: ${mysql.username}
+    password: ${mysql.password}
+  jackson: time-zone=Asia/Seoul
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: ${hibernate.ddl-auto}
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB # 파일 하나 당 최대 사이즈
+      max-request-size: 20MB # 요청 당 최대 사이즈
+
+cloud:
+  aws:
+    s3:
+      bucket: birdchain
+    stack.auto: false
+    region.static: ap-northeast-2
+    credentials:
+      accessKey: ${aws.credentials.accessKey}
+      secretKey: ${aws.credentials.secretKey}
+
+cors:
+  allowedOrigins: ${cors.origins}

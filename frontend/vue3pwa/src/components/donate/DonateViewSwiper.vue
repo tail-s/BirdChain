@@ -22,6 +22,7 @@
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </swiper>
+    <br/>
     <div>총 기부 금액</div>
     <div class="total">{{ totalValue }}ETH</div>
   </div>
@@ -148,7 +149,7 @@ export default {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 3%;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .donatetitle {

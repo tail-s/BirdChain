@@ -20,10 +20,10 @@
           <v-icon>mdi-map-marker</v-icon>
           정보공유
         </v-btn>
-        <v-btn style="padding: 10px;" @click="this.$router.push({ name: 'mypage' })">
+        <!-- <v-btn style="padding: 10px;" @click="this.$router.push({ name: 'mypage' })">
           <v-icon>mdi-map-marker</v-icon>
           내정보
-        </v-btn>
+        </v-btn> -->
         <v-btn style="padding: 10px;" @click="this.$router.push({ name: 'gameView' })">
           <v-icon>mdi-gamepad-variant</v-icon>
           게임
@@ -46,9 +46,8 @@ export default {
     margin-top: 50px;
 }
 .v-bottom-navigation__content {
-  justify-content: space-around;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .v-btn--stacked.v-btn--size-default{

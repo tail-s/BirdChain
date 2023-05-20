@@ -9,11 +9,17 @@ export async function createWeb3Instance() {
     wStore.setwallet(value);
   };
 
+  const userAgent = navigator.userAgent;
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+
   if (window.ethereum) {
     web3 = new Web3(window.ethereum);
     await window.ethereum.enable();
   } else if (window.web3) {
     web3 = new Web3(window.web3.currentProvider);
+  } else if(isMobile){
+    alert("기부는 pc 환경에서만 가능합니다.");
   } else {
     alert("MetaMask를 설치하고 로그인한 후 네트워크를 Sepolia로 변경해주세요.");
     window.open("https://metamask.io/");

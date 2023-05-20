@@ -5,7 +5,7 @@
         지도 위를 클릭하여
         <img src="img/icons/pin.png" class="info-img" /> 핀을 움직여보세요.
       </div>
-      <div>아래에 게시물을 작성할 위치의 주소가 표시됩니다.</div>
+      <div>아래에 게시글을 작성할 위치의 주소가 표시됩니다.</div>
     </div>
     <MarkerRegist
       :placeInfo="placeInfo"
@@ -107,7 +107,7 @@ const makePin = () => {
 // <마커 표시하기>
 const markers = ref([]);
 const markerData = ref([]);
-const marker_id = ref(1);
+const marker_id = ref(4);
 //마커 이미지의 이미지 주소입니다
 const imgSrc = "img/icons/feather.png";
 // 마커 이미지의 이미지 크기 입니다
@@ -125,7 +125,7 @@ const displayMarker = (marker_type) => {
   // axios 요청 보내서 DB 마커 가젹오기
   getMarkersByType(marker_type).then(({ data }) => {
     markerData.value = data.value;
-
+    marker_id.value = data.value[0].id;
     // 전달받은 위도&경도로 마커 생성하고 지도에 표시하기
     if (markerData.value.length > 0) {
       markerData.value.forEach((m) => {
@@ -149,6 +149,7 @@ const displayMarker = (marker_type) => {
     }
   });
 };
+
 // 이전에 선택한 마커의 참조 변수
 var previousMarker = null;
 
@@ -209,7 +210,7 @@ const searchDetailAddrFromCoords = (coords, callback) => {
 };
 
 const reloadMarker = () => {
-  displayMarker("");
+  displayMarker(marker_type.value);
 };
 
 const isValid = ref(true);
@@ -282,10 +283,13 @@ const searchByAddress = (keyword) => {
 };
 
 // <타입별로 마커 검색하기>
+const marker_type = ref("");
 const searchByType = (data) => {
   if (data.length == 2 || data.length == 0) {
+    marker_type.value = "";
     displayMarker("");
   } else {
+    marker_type.value = data[0];
     displayMarker(data[0]);
   }
 };
@@ -367,7 +371,7 @@ const searchByType = (data) => {
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
-  width: 450px;
+  width: 400px;
 }
 
 @media (max-width: 800px) {
@@ -408,10 +412,10 @@ const searchByType = (data) => {
     font-size: 3vw;
   }
   .info-regist {
-    font-size: 2vw;
+    font-size: 2.4vw;
   }
   .map-top-text {
-    font-size: 2vw;
+    font-size: 2.4vw;
   }
 }
 </style>

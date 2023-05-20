@@ -57,13 +57,25 @@
     <div>설정하신 금액에서 예상 가스비를 제외하고 기부가 됩니다.</div>
     <div>설정하신 금액보다 적거나 많이 ETH가 소비될 수 있습니다.</div>
 
-    <v-overlay v-model="loading">
-      <v-progress-circular
-        indeterminate
-        size="70"
-        width="7"
-        color="primary"
-      ></v-progress-circular>
+    <v-overlay v-model="loading" persistent="true">
+      <div class="loading">
+        <v-progress-circular
+          indeterminate
+          size="90"
+          width="9"
+          color="green-darken-4"
+          align-items="center"
+        ></v-progress-circular>
+        <br />
+        <div style="background-color: rgb(000, 102, 051, 0.5); color: aliceblue">
+          <div style="text-align: center">
+            메타마스크가 자동으로 열리지 않았다면 메타마스크를 열어주세요.
+          </div>
+          <div style="text-align: center">
+            블록체인에 블록을 생성하는데 시간이 걸립니다. 조금만 기다려주세요.
+          </div>
+        </div>
+      </div>
     </v-overlay>
   </div>
 </template>
@@ -113,7 +125,6 @@ export default {
         dialog.value = true;
         await getAccount();
         checkAccounts();
-
       }
     };
 
@@ -200,9 +211,8 @@ export default {
 </script>
 <style scoped>
 .donate-button {
-  margin-top: 3vw;
   font-size: 1.5vw;
-  margin-bottom: 50px;
+  margin-bottom: 2rem;
 }
 .donate-card {
   display: flex;
@@ -215,6 +225,11 @@ export default {
   height: 20vw;
 }
 
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .awesome-icon {
   display: flex;
   margin-bottom: 2vw;

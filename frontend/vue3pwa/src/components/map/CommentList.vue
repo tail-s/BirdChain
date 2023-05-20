@@ -12,17 +12,14 @@
           <div class="confirm-items">
             <div
               class="icons"
-              v-if="!comment.deleteFlagComment && !comment.modifyFlagComment"
-            >
+              v-if="!comment.deleteFlagComment && !comment.modifyFlagComment">
               <font-awesome-icon
                 :icon="['fas', 'pen-to-square']"
-                @click="showModifyInputComment(comment)"
-              />
+                @click="showModifyInputComment(comment)" />
               <span> | </span>
               <font-awesome-icon
                 :icon="['fas', 'trash']"
-                @click="showInputForm(comment)"
-              />
+                @click="showInputForm(comment)" />
             </div>
             <div v-if="comment.modifyFlagComment" class="confirm-btns">
               <button @click="showModifyInputComment(comment)">취소</button>
@@ -42,8 +39,7 @@
         </div>
         <div
           v-if="comment.deleteFlagComment || comment.modifyFlagComment"
-          class="password-items"
-        >
+          class="password-items">
           <form @submit.prevent class="password-form">
             <label class="password-label">비밀번호</label>
             <input
@@ -51,8 +47,7 @@
               placeholder="비밀번호를 입력해주세요."
               v-model="comment.password"
               v-focus="comment.isFocused"
-              class="password-input-comment"
-            />
+              class="password-input-comment" />
           </form>
           <div v-if="comment.isAcceptable" class="warn-info">
             비밀번호를 잘못 입력했습니다. 다시 입력해주세요.
@@ -64,21 +59,18 @@
         <form
           @submit.prevent
           v-if="comment.modifyFlagComment"
-          class="modify-input-form"
-        >
+          class="modify-input-form">
           <textarea
             id="content"
             v-model="comment.modiContentComment"
-            class="modify-input-comment"
-          ></textarea>
+            class="modify-input-comment"></textarea>
         </form>
       </div>
     </div>
     <div class="comment-regist">
       <CommentRegist
         :marker_id="props.marker_id"
-        @reloadComment="reloadComment"
-      />
+        @reloadComment="reloadComment" />
     </div>
   </v-card>
 </template>
@@ -261,7 +253,7 @@ const doDeleteMarker = (comment) => {
         .catch((error) => {
           Swal.fire({
             position: "center",
-            title: `"${error.response.data.message}"`,
+            title: `${error.response.data.message}`,
             icon: "error",
           }).then(function () {
             comment.isAcceptable = true;
@@ -363,7 +355,7 @@ const onWheel = (event) => {
 }
 
 .warn-info {
-  width: 400px;
+  width: 390px;
   color: red;
   font-size: 10px;
   padding-top: 5px;
@@ -380,5 +372,30 @@ const onWheel = (event) => {
   padding: 5px;
   border-radius: 5px;
   margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .my-card {
+    width: 380px;
+  }
+  .card-top {
+    width: 360px;
+  }
+  .modify-input-form {
+    width: 363px;
+  }
+  .modify-input-comment {
+    width: 340px;
+    margin-left: 18px;
+  }
+  .password-label {
+    width: 40px;
+  }
+  .password-input-comment {
+    width: 286px;
+  }
+  .warn-info {
+    width: 325px;
+  }
 }
 </style>

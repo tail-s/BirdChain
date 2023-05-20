@@ -42,7 +42,6 @@ export default {
 </script>
 <style>
 .nftbox {
-  padding-right: 5vw;
   padding-left: 3vw;
   padding-top: 2vw;
   padding-bottom: 5vw;
